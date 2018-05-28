@@ -2,7 +2,7 @@
 //  Board.swift
 //  Spaccaquindici
 //
-//  Created by Nate Higgers on 19/05/2018.
+//  Created by Giovi on 19/05/2018.
 //  Copyright © 2018 Unibo App Mobili. All rights reserved.
 //
 
@@ -38,8 +38,7 @@ struct Board {
             totalInversions += getInversion(withIndexInTilesArray: tileIndex)
         }
         
-        return ( (sideLength.isOdd) && (totalInversions.isEven) ||
-                  )
+        return ( ((sideLength.isOdd) && (totalInversions.isEven)) || ( (sideLength.isEven) && (emptyTile.y.isOdd) == (totalInversions.isEven)))
     }
     
     private func getInversion(withIndexInTilesArray id: Int) -> Int {

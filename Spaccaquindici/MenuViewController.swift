@@ -2,7 +2,7 @@
 //  MenuViewController.swift
 //  Spaccaquindici
 //
-//  Created by Nate Higgers on 19/05/2018.
+//  Created by Giovi on 19/05/2018.
 //  Copyright © 2018 Unibo App Mobili. All rights reserved.
 //
 
