@@ -30,7 +30,6 @@ struct Board {
     }
     
     func isSolvable() -> Bool {
-        // get all inversion for every tile in tiles
         // ( (grid width odd) && (#inversions even) )  ||  ( (grid width even) && ((blank on odd row from bottom) == (#inversions even)) )
         // https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
         var totalInversions = 0
