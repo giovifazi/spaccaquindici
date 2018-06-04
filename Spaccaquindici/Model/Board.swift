@@ -29,6 +29,14 @@ struct Board {
         self.emptyTile = TilePosition(x: sideLength-1, y: sideLength-1)
     }
     
+    func getTile(at tileNumber:Int) -> Tile {
+        if tileNumber >= 1, tileNumber <= 16 {
+            return tiles[tileNumber-1]
+        } else {
+            return tiles[0]
+        }
+    }
+    
     func isSolvable() -> Bool {
         // ( (grid width odd) && (#inversions even) )  ||  ( (grid width even) && ((blank on odd row from bottom) == (#inversions even)) )
         // https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
@@ -54,6 +62,8 @@ struct Board {
         
         return inversions
     }
+    
+    // TODO: scramble method
 }
 
 extension Int {

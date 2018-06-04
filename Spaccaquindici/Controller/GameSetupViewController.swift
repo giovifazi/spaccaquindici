@@ -2,7 +2,7 @@
 //  GameSetupViewController.swift
 //  Spaccaquindici
 //
-//  Created by Nate Higgers on 31/05/2018.
+//  Created by Giovi on 31/05/2018.
 //  Copyright © 2018 Unibo App Mobili. All rights reserved.
 //
 
@@ -71,8 +71,18 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PlayGame" {
-            
+        if segue.identifier == "Choose Size" {
+            if let sizeChosen = (sender as? UIButton)?.currentTitle {
+                if let gvcontroller = segue.destination as? GameViewController {
+                    switch sizeChosen {
+                        case "4x4": gvcontroller.boardSideLength = 4
+                        case "5x5": gvcontroller.boardSideLength = 5
+                        case "6x6": gvcontroller.boardSideLength = 6
+                        default:    gvcontroller.boardSideLength = 4
+                    }
+                    
+                }
+            }
         }
     }
  
