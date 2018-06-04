@@ -17,6 +17,10 @@
 		355CA7A520AF7BA200AB845E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 355CA7A420AF7BA200AB845E /* Assets.xcassets */; };
 		355CA7A820AF7BA200AB845E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 355CA7A620AF7BA200AB845E /* LaunchScreen.storyboard */; };
 		355CA7B320AF7BA200AB845E /* SpaccaquindiciTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355CA7B220AF7BA200AB845E /* SpaccaquindiciTests.swift */; };
+		3569DF2920C1661C000541B8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3569DF2820C1661C000541B8 /* Default-568h@2x.png */; };
+		359391E720C46FCF00E02837 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 359391E620C46FCF00E02837 /* BoardViewController.swift */; };
+		35E6C55820C060BA00ECAF4F /* GameSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E6C55720C060BA00ECAF4F /* GameSetupViewController.swift */; };
+		35E6C55A20C060D200ECAF4F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E6C55920C060D200ECAF4F /* GameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		355CA7AE20AF7BA200AB845E /* SpaccaquindiciTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaccaquindiciTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		355CA7B220AF7BA200AB845E /* SpaccaquindiciTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaccaquindiciTests.swift; sourceTree = "<group>"; };
 		355CA7B420AF7BA200AB845E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3569DF2820C1661C000541B8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		359391E620C46FCF00E02837 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		35E6C55720C060BA00ECAF4F /* GameSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupViewController.swift; sourceTree = "<group>"; };
+		35E6C55920C060D200ECAF4F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +75,7 @@
 		355CA78E20AF7BA000AB845E = {
 			isa = PBXGroup;
 			children = (
+				3569DF2820C1661C000541B8 /* Default-568h@2x.png */,
 				355CA79920AF7BA000AB845E /* Spaccaquindici */,
 				355CA7B120AF7BA200AB845E /* SpaccaquindiciTests */,
 				355CA79820AF7BA000AB845E /* Products */,
@@ -85,16 +94,13 @@
 		355CA79920AF7BA000AB845E /* Spaccaquindici */ = {
 			isa = PBXGroup;
 			children = (
-				355CA79A20AF7BA000AB845E /* AppDelegate.swift */,
-				355CA79C20AF7BA000AB845E /* ViewController.swift */,
-				355CA79E20AF7BA000AB845E /* Main.storyboard */,
-				354FBDE820B0A361009D91BC /* MenuViewController.swift */,
+				3569DF2720C163C3000541B8 /* Model */,
+				3569DF2620C16386000541B8 /* View */,
+				3569DF2420C162CE000541B8 /* Controller */,
 				355CA7A420AF7BA200AB845E /* Assets.xcassets */,
-				354FBDEA20B0B234009D91BC /* Tile.swift */,
-				354FBDEC20B0B84A009D91BC /* Board.swift */,
-				355CA7A620AF7BA200AB845E /* LaunchScreen.storyboard */,
-				355CA7A920AF7BA200AB845E /* Info.plist */,
 				355CA7A120AF7BA000AB845E /* Spaccaquindici.xcdatamodeld */,
+				355CA7A920AF7BA200AB845E /* Info.plist */,
+				35E6C55B20C0B34000ECAF4F /* Supporting Files */,
 			);
 			path = Spaccaquindici;
 			sourceTree = "<group>";
@@ -106,6 +112,44 @@
 				355CA7B420AF7BA200AB845E /* Info.plist */,
 			);
 			path = SpaccaquindiciTests;
+			sourceTree = "<group>";
+		};
+		3569DF2420C162CE000541B8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				355CA79C20AF7BA000AB845E /* ViewController.swift */,
+				359391E620C46FCF00E02837 /* BoardViewController.swift */,
+				35E6C55720C060BA00ECAF4F /* GameSetupViewController.swift */,
+				35E6C55920C060D200ECAF4F /* GameViewController.swift */,
+				354FBDE820B0A361009D91BC /* MenuViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3569DF2620C16386000541B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				355CA79E20AF7BA000AB845E /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3569DF2720C163C3000541B8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				354FBDEC20B0B84A009D91BC /* Board.swift */,
+				354FBDEA20B0B234009D91BC /* Tile.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		35E6C55B20C0B34000ECAF4F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				355CA79A20AF7BA000AB845E /* AppDelegate.swift */,
+				355CA7A620AF7BA200AB845E /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				355CA7A820AF7BA200AB845E /* LaunchScreen.storyboard in Resources */,
+				3569DF2920C1661C000541B8 /* Default-568h@2x.png in Resources */,
 				355CA7A520AF7BA200AB845E /* Assets.xcassets in Resources */,
 				355CA7A020AF7BA000AB845E /* Main.storyboard in Resources */,
 			);
@@ -213,8 +258,11 @@
 				355CA7A320AF7BA000AB845E /* Spaccaquindici.xcdatamodeld in Sources */,
 				354FBDED20B0B84A009D91BC /* Board.swift in Sources */,
 				354FBDEB20B0B234009D91BC /* Tile.swift in Sources */,
+				35E6C55A20C060D200ECAF4F /* GameViewController.swift in Sources */,
 				355CA79B20AF7BA000AB845E /* AppDelegate.swift in Sources */,
+				359391E720C46FCF00E02837 /* BoardViewController.swift in Sources */,
 				354FBDE920B0A361009D91BC /* MenuViewController.swift in Sources */,
+				35E6C55820C060BA00ECAF4F /* GameSetupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
