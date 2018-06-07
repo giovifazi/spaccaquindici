@@ -30,8 +30,17 @@ struct Board {
     }
     
     func getTile(at tileNumber:Int) -> Tile {
-        if tileNumber >= 1, tileNumber <= 16 {
-            return tiles[tileNumber-1]
+        if tileNumber >= 0, tileNumber <= 15 {
+            return tiles[tileNumber]
+        } else {
+            return tiles[0]
+        }
+    }
+    
+    func getTile(x:Int, y:Int, width:Int) -> Tile {
+        let arrayIndex = y*width+x
+        if tiles.indices.contains(arrayIndex) {
+            return tiles[arrayIndex]
         } else {
             return tiles[0]
         }
@@ -63,7 +72,39 @@ struct Board {
         return inversions
     }
     
-    // TODO: scramble method
+    func getMovableTiles() -> [Tile] {
+        var movableTiles = [Tile]()
+        let candidatesTiles:[TilePosition] = [TilePosition(x: emptyTile.x-1, y: emptyTile.y),
+                                              TilePosition(x: emptyTile.x+1, y: emptyTile.y),
+                                              TilePosition(x: emptyTile.x, y: emptyTile.y+1),
+                                              TilePosition(x: emptyTile.x, y: emptyTile.y-1)
+                                              ]
+        
+        for tileIndex in 0..<tiles.count {
+            for candidateIndex in 0..<candidatesTiles.count {
+                if tiles[tileIndex].position == candidatesTiles[candidateIndex] {
+                    movableTiles.append(tiles[tileIndex])
+                }
+            }
+        }
+        
+        return movableTiles
+    }
+      
+    func scrambleWithMoves() {
+        for _ in 0..<1000 {
+            // find all movable tiles near the empty tile
+            var movableTiles = getMovableTiles()
+            
+            // perform a random move on a random tile
+            movableTiles[Int.random(in: movableTiles.count)].moveDown(withoutExcedingRow: sideLength)
+            movableTiles[Int.random(in: movableTiles.count)].moveUp()
+            movableTiles[Int.random(in: movableTiles.count)].moveRight(withoutExcedingColumn: sideLength)
+            movableTiles[Int.random(in: movableTiles.count)].moveLeft()
+        }
+    }
+    
+    func scramble() {}
 }
 
 extension Int {
@@ -81,5 +122,9 @@ extension Int {
         } else {
             return false
         }
+    }
+    
+    static func random(in maxInt: Int) -> Int {
+        return Int(arc4random_uniform(UInt32(maxInt)))
     }
 }

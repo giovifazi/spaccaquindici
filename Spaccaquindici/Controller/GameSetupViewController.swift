@@ -10,7 +10,7 @@ import UIKit
 
 class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    let images = [#imageLiteral(resourceName: "unibo"), #imageLiteral(resourceName: "0_4gp8D3JpRj3t0K34"), #imageLiteral(resourceName: "hqdefault")]
+    let images = [#imageLiteral(resourceName: "fedora"), #imageLiteral(resourceName: "unibo"), #imageLiteral(resourceName: "smile") ]
     private var boardSize = 4
     @IBOutlet weak var imageUIPicker: UIPickerView!
     var rotationAngle: CGFloat!
@@ -74,6 +74,8 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
         if segue.identifier == "Choose Size" {
             if let sizeChosen = (sender as? UIButton)?.currentTitle {
                 if let gvcontroller = segue.destination as? GameViewController {
+                    
+                    // Pass the size to gameController
                     switch sizeChosen {
                         case "4x4": gvcontroller.boardSideLength = 4
                         case "5x5": gvcontroller.boardSideLength = 5
@@ -81,6 +83,8 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         default:    gvcontroller.boardSideLength = 4
                     }
                     
+                    // Pass the image to gameController
+                    gvcontroller.gameImage = images[imageUIPicker.selectedRow(inComponent: 0)]
                 }
             }
         }

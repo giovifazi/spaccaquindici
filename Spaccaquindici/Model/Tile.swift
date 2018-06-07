@@ -13,9 +13,15 @@ struct TilePosition {
     var y: Int
 }
 
+extension TilePosition {
+    static func == (lhs: TilePosition, rhs: TilePosition) -> Bool {
+        return (lhs.x == rhs.x) && (lhs.y == rhs.y)
+    }
+}
+
 struct Tile {
     public private(set) var id: Int
-    private var position: TilePosition
+    public private(set) var position: TilePosition
     private static var identifierFactory = 0
     
     init(atPosition position: TilePosition)
