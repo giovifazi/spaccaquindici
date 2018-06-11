@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var game = Board(sideLength: 4)
+    //var game = Board(sideLength: 4)
     
     override func viewDidLoad() {
         super.viewDidLoad()

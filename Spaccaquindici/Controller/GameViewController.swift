@@ -31,6 +31,7 @@ class GameViewController: UIViewController {
         
         for row in 0..<boardSideLength! {
             for column in 0..<boardSideLength! {
+                // Creates 15 buttons
                 if column*boardSideLength+row != (boardSideLength*boardSideLength)-1 {
                     let button = UIButton()
                     button.bounds = tileRect
@@ -52,6 +53,8 @@ class GameViewController: UIViewController {
         
         // Game Logic
         gameBoard = Board(sideLength: boardSideLength!)
+    
+        print(gameBoard.checkIfSolved())
     }
     
     func scrambleBoard() {

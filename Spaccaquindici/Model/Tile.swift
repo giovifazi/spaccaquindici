@@ -17,6 +17,11 @@ extension TilePosition {
     static func == (lhs: TilePosition, rhs: TilePosition) -> Bool {
         return (lhs.x == rhs.x) && (lhs.y == rhs.y)
     }
+    
+    static func != (lhs: TilePosition, rhs: TilePosition) -> Bool {
+        return !(lhs == rhs)
+    }
+    
 }
 
 struct Tile {

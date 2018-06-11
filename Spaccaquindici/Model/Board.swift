@@ -12,6 +12,7 @@ struct Board {
     var sideLength: Int
     var tiles = [Tile]()
     var emptyTile: TilePosition
+    var solvedState = [TilePosition]()
     
     init(sideLength: Int) {
         self.sideLength = sideLength
@@ -21,6 +22,7 @@ struct Board {
                 if x != sideLength-1 || y != sideLength-1 {
                     let newPosition = TilePosition(x: x, y: y)
                     let newTile = Tile(atPosition: newPosition)
+                    self.solvedState.append(newPosition)
                     self.tiles.append(newTile)
                 }
             }
@@ -92,6 +94,20 @@ struct Board {
         }
         
         return inversions
+    }
+    
+    func checkIfSolved() -> Bool {
+        if emptyTile.x != sideLength-1 || emptyTile.y != sideLength-1 {
+            return false
+        }
+        
+        for tileIndex in 0..<solvedState.count {
+            if tiles[tileIndex].position != solvedState[tileIndex] {
+                return false
+            }
+        }
+        
+        return true
     }
     
     func scramble() {}

@@ -14,8 +14,8 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
     private var boardSize = 4
     @IBOutlet weak var imageUIPicker: UIPickerView!
     var rotationAngle: CGFloat!
-    let width:CGFloat = 100
-    let height:CGFloat = 200
+    let width:CGFloat = 190
+    let height:CGFloat = 190
     
     // example: 1 => |comp|     2 => |comp1|comp2|
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -28,11 +28,11 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 100
+        return height + 10
     }
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        return 100
+        return width + 10
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -55,13 +55,12 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
 
         imageUIPicker.delegate = self
         imageUIPicker.dataSource = self
-        imageUIPicker.layer.borderWidth = 1.5
         
         // picker view rotation
         rotationAngle = -90 * (.pi/180)
         imageUIPicker.transform = CGAffineTransform(rotationAngle: rotationAngle)
         
-        imageUIPicker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
+        imageUIPicker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 240)
         imageUIPicker.center = self.view.center
         self.view.addSubview(imageUIPicker)
     }
