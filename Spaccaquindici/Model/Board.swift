@@ -16,8 +16,8 @@ struct Board {
     init(sideLength: Int) {
         self.sideLength = sideLength
         
-        for x in 0..<sideLength {
-            for y in 0..<sideLength {
+        for y in 0..<sideLength {
+            for x in 0..<sideLength {
                 if x != sideLength-1 || y != sideLength-1 {
                     let newPosition = TilePosition(x: x, y: y)
                     let newTile = Tile(atPosition: newPosition)
@@ -46,6 +46,28 @@ struct Board {
         }
     }
     
+    // Return true if the tile was moved
+    mutating func moveTile(withIndex tileIndex: Int) -> Bool {
+        // Check if tileIndex is a movable tile
+        let candidatesTiles:[TilePosition] = [TilePosition(x: emptyTile.x-1, y: emptyTile.y),
+                                              TilePosition(x: emptyTile.x+1, y: emptyTile.y),
+                                              TilePosition(x: emptyTile.x, y: emptyTile.y+1),
+                                              TilePosition(x: emptyTile.x, y: emptyTile.y-1)
+        ]
+        
+        for candidateIndex in 0..<candidatesTiles.count {
+            if (tiles[tileIndex].position == candidatesTiles[candidateIndex]) {
+                let tmp = tiles[tileIndex].position
+                tiles[tileIndex].position = emptyTile
+                emptyTile = tmp
+                
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     func isSolvable() -> Bool {
         // ( (grid width odd) && (#inversions even) )  ||  ( (grid width even) && ((blank on odd row from bottom) == (#inversions even)) )
         // https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
@@ -70,38 +92,6 @@ struct Board {
         }
         
         return inversions
-    }
-    
-    func getMovableTiles() -> [Tile] {
-        var movableTiles = [Tile]()
-        let candidatesTiles:[TilePosition] = [TilePosition(x: emptyTile.x-1, y: emptyTile.y),
-                                              TilePosition(x: emptyTile.x+1, y: emptyTile.y),
-                                              TilePosition(x: emptyTile.x, y: emptyTile.y+1),
-                                              TilePosition(x: emptyTile.x, y: emptyTile.y-1)
-                                              ]
-        
-        for tileIndex in 0..<tiles.count {
-            for candidateIndex in 0..<candidatesTiles.count {
-                if tiles[tileIndex].position == candidatesTiles[candidateIndex] {
-                    movableTiles.append(tiles[tileIndex])
-                }
-            }
-        }
-        
-        return movableTiles
-    }
-      
-    func scrambleWithMoves() {
-        for _ in 0..<1000 {
-            // find all movable tiles near the empty tile
-            var movableTiles = getMovableTiles()
-            
-            // perform a random move on a random tile
-            movableTiles[Int.random(in: movableTiles.count)].moveDown(withoutExcedingRow: sideLength)
-            movableTiles[Int.random(in: movableTiles.count)].moveUp()
-            movableTiles[Int.random(in: movableTiles.count)].moveRight(withoutExcedingColumn: sideLength)
-            movableTiles[Int.random(in: movableTiles.count)].moveLeft()
-        }
     }
     
     func scramble() {}

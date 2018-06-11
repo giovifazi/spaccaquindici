@@ -21,8 +21,8 @@ extension TilePosition {
 
 struct Tile {
     public private(set) var id: Int
-    public private(set) var position: TilePosition
-    private static var identifierFactory = 0
+    public var position: TilePosition
+    private static var identifierFactory = -1
     
     init(atPosition position: TilePosition)
     {
@@ -33,21 +33,5 @@ struct Tile {
     private static func getUniqueIdentifier() -> Int {
         identifierFactory += 1
         return identifierFactory
-    }
-    
-    mutating func moveLeft() {
-        self.position.x >= 1 ? self.position.x -= 1 : nil
-    }
-    
-    mutating func moveRight(withoutExcedingColumn limit: Int) {
-        self.position.x <= limit-1 ? self.position.x += 1 : nil
-    }
-    
-    mutating func moveUp() {
-        self.position.y >= 1 ? self.position.y -= 1 : nil
-    }
-    
-    mutating func moveDown(withoutExcedingRow limit: Int) {
-        self.position.y <= limit-1 ? self.position.y += 1 : nil
     }
 }
