@@ -31,7 +31,7 @@ class GameViewController: UIViewController {
         
         for row in 0..<boardSideLength! {
             for column in 0..<boardSideLength! {
-                // Creates 15 buttons
+                // Creates all the buttons
                 if column*boardSideLength+row != (boardSideLength*boardSideLength)-1 {
                     let button = UIButton()
                     button.bounds = tileRect
@@ -58,8 +58,8 @@ class GameViewController: UIViewController {
     }
     
     func scrambleBoard() {
-        for _ in 0...100 {
-            gameButtons[Int.random(in: boardSideLength-1)].sendActions(for: .touchUpInside)
+        for _ in 0...1000 {
+            gameButtons[Int.random(in: boardSideLength*boardSideLength-1)].sendActions(for: .touchUpInside)
         }
     }
     

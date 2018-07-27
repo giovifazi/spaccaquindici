@@ -11,12 +11,13 @@ import Foundation
 struct Board {
     var sideLength: Int
     var tiles = [Tile]()
-    var emptyTile: TilePosition
+    var emptyTilePos: TilePosition
     var solvedState = [TilePosition]()
     
     init(sideLength: Int) {
         self.sideLength = sideLength
         
+        // generates tiles in order
         for y in 0..<sideLength {
             for x in 0..<sideLength {
                 if x != sideLength-1 || y != sideLength-1 {
@@ -28,11 +29,11 @@ struct Board {
             }
         }
         
-        self.emptyTile = TilePosition(x: sideLength-1, y: sideLength-1)
+        self.emptyTilePos = TilePosition(x: sideLength-1, y: sideLength-1)
     }
     
     func getTile(at tileNumber:Int) -> Tile {
-        if tileNumber >= 0, tileNumber <= 15 {
+        if tileNumber >= 0, tileNumber <= (sideLength*sideLength-1) {
             return tiles[tileNumber]
         } else {
             return tiles[0]
@@ -48,24 +49,36 @@ struct Board {
         }
     }
     
+    func isAdjacentToEmpty(tileIndex:Int) -> Bool {
+        let tile = getTile(at: tileIndex)
+        
+        let candidatePositions:[TilePosition] = [
+            TilePosition(x: tile.position.x+1, y: tile.position.y),
+            TilePosition(x: tile.position.x-1, y: tile.position.y),
+            TilePosition(x: tile.position.x, y: tile.position.y+1),
+            TilePosition(x: tile.position.x, y: tile.position.y-1)
+        ]
+            
+            for candidate in candidatePositions {
+                if candidate == self.emptyTilePos {
+                    return true
+                }
+            }
+        
+        return false
+    }
+    
     // Return true if the tile was moved
     mutating func moveTile(withIndex tileIndex: Int) -> Bool {
-        // Check if tileIndex is a movable tile
-        let candidatesTiles:[TilePosition] = [TilePosition(x: emptyTile.x-1, y: emptyTile.y),
-                                              TilePosition(x: emptyTile.x+1, y: emptyTile.y),
-                                              TilePosition(x: emptyTile.x, y: emptyTile.y+1),
-                                              TilePosition(x: emptyTile.x, y: emptyTile.y-1)
-        ]
         
-        for candidateIndex in 0..<candidatesTiles.count {
-            if (tiles[tileIndex].position == candidatesTiles[candidateIndex]) {
+        // Check if tileIndex is adjacent to the empty tile
+            if isAdjacentToEmpty(tileIndex: tileIndex) {
                 let tmp = tiles[tileIndex].position
-                tiles[tileIndex].position = emptyTile
-                emptyTile = tmp
+                tiles[tileIndex].position = self.emptyTilePos
+                self.emptyTilePos = tmp
                 
                 return true
             }
-        }
         
         return false
     }
@@ -78,7 +91,7 @@ struct Board {
             totalInversions += getInversion(withIndexInTilesArray: tileIndex)
         }
         
-        return ( ((sideLength.isOdd) && (totalInversions.isEven)) || ( (sideLength.isEven) && (emptyTile.y.isOdd) == (totalInversions.isEven)))
+        return ( ((sideLength.isOdd) && (totalInversions.isEven)) || ( (sideLength.isEven) && (self.emptyTilePos.y.isOdd) == (totalInversions.isEven)))
     }
     
     private func getInversion(withIndexInTilesArray id: Int) -> Int {
@@ -97,7 +110,7 @@ struct Board {
     }
     
     func checkIfSolved() -> Bool {
-        if emptyTile.x != sideLength-1 || emptyTile.y != sideLength-1 {
+        if self.emptyTilePos.x != sideLength-1 || self.emptyTilePos.y != sideLength-1 {
             return false
         }
         
