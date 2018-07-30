@@ -29,13 +29,17 @@ struct Tile {
     public var position: TilePosition
     private static var identifierFactory = -1
     
-    init(atPosition position: TilePosition)
+    init(atPosition position: TilePosition, resetFactory: Bool)
     {
-        self.id = Tile.getUniqueIdentifier()
+        self.id = Tile.getUniqueIdentifier(resetFactory: resetFactory)
         self.position = position
     }
     
-    private static func getUniqueIdentifier() -> Int {
+    private static func getUniqueIdentifier(resetFactory: Bool) -> Int {
+        if resetFactory {
+            identifierFactory = -1
+        }
+        
         identifierFactory += 1
         return identifierFactory
     }

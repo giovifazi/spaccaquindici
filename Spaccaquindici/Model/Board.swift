@@ -22,7 +22,15 @@ struct Board {
             for x in 0..<sideLength {
                 if x != sideLength-1 || y != sideLength-1 {
                     let newPosition = TilePosition(x: x, y: y)
-                    let newTile = Tile(atPosition: newPosition)
+                    
+                    // reset the tiles inital id to 0
+                    var newTile: Tile
+                    if x == 0, y == 0 {
+                        newTile = Tile(atPosition: newPosition, resetFactory: true)
+                    } else {
+                        newTile = Tile(atPosition: newPosition, resetFactory: false)
+                    }
+                    
                     self.solvedState.append(newPosition)
                     self.tiles.append(newTile)
                 }
@@ -32,39 +40,35 @@ struct Board {
         self.emptyTilePos = TilePosition(x: sideLength-1, y: sideLength-1)
     }
     
-    func getTile(at tileNumber:Int) -> Tile {
-        if tileNumber >= 0, tileNumber <= (sideLength*sideLength-1) {
+    func getTile(at tileNumber:Int) -> Tile? {
+        if tiles.indices.contains(tileNumber) {
             return tiles[tileNumber]
         } else {
-            return tiles[0]
+            return nil
         }
     }
     
-    func getTile(x:Int, y:Int, width:Int) -> Tile {
+    func getTile(x:Int, y:Int, width:Int) -> Tile? {
         let arrayIndex = y*width+x
-        if tiles.indices.contains(arrayIndex) {
-            return tiles[arrayIndex]
-        } else {
-            return tiles[0]
-        }
+        return getTile(at: arrayIndex)
     }
     
     func isAdjacentToEmpty(tileIndex:Int) -> Bool {
-        let tile = getTile(at: tileIndex)
-        
-        let candidatePositions:[TilePosition] = [
-            TilePosition(x: tile.position.x+1, y: tile.position.y),
-            TilePosition(x: tile.position.x-1, y: tile.position.y),
-            TilePosition(x: tile.position.x, y: tile.position.y+1),
-            TilePosition(x: tile.position.x, y: tile.position.y-1)
-        ]
+        if let tile = getTile(at: tileIndex) {
+
+            let candidatePositions:[TilePosition] = [
+                TilePosition(x: tile.position.x+1, y: tile.position.y),
+                TilePosition(x: tile.position.x-1, y: tile.position.y),
+                TilePosition(x: tile.position.x, y: tile.position.y+1),
+                TilePosition(x: tile.position.x, y: tile.position.y-1)
+            ]
             
-            for candidate in candidatePositions {
-                if candidate == self.emptyTilePos {
-                    return true
+                for candidate in candidatePositions {
+                    if candidate == self.emptyTilePos {
+                        return true
+                    }
                 }
-            }
-        
+        }
         return false
     }
     
@@ -83,32 +87,6 @@ struct Board {
         return false
     }
     
-    func isSolvable() -> Bool {
-        // ( (grid width odd) && (#inversions even) )  ||  ( (grid width even) && ((blank on odd row from bottom) == (#inversions even)) )
-        // https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
-        var totalInversions = 0
-        for tileIndex in 0..<tiles.count {
-            totalInversions += getInversion(withIndexInTilesArray: tileIndex)
-        }
-        
-        return ( ((sideLength.isOdd) && (totalInversions.isEven)) || ( (sideLength.isEven) && (self.emptyTilePos.y.isOdd) == (totalInversions.isEven)))
-    }
-    
-    private func getInversion(withIndexInTilesArray id: Int) -> Int {
-        if id == tiles.count-1 {
-            return 0
-        }
-        
-        var inversions = 0
-        for compareIndex in id+1..<tiles.count {
-            if tiles[compareIndex].id < tiles[id].id {
-                inversions += 1
-            }
-        }
-        
-        return inversions
-    }
-    
     func checkIfSolved() -> Bool {
         if self.emptyTilePos.x != sideLength-1 || self.emptyTilePos.y != sideLength-1 {
             return false
@@ -123,7 +101,7 @@ struct Board {
         return true
     }
     
-    func scramble() {}
+
 }
 
 extension Int {

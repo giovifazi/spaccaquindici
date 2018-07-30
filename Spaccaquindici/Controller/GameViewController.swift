@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        scrambleBoard()
+        //scrambleBoardRand()
     }
     
     override func viewDidLoad() {
@@ -27,15 +27,17 @@ class GameViewController: UIViewController {
         let boardRect = calculateBoardBounds()
         let tileSize = boardRect.width / CGFloat(boardSideLength)
         let tileRect = CGRect(x: 0, y: 0, width: tileSize, height: tileSize)
-        let slicedImage = gameImage.slice(into: boardSideLength)
+        
         
         for row in 0..<boardSideLength! {
             for column in 0..<boardSideLength! {
+                
                 // Creates all the buttons
                 if column*boardSideLength+row != (boardSideLength*boardSideLength)-1 {
                     let button = UIButton()
                     button.bounds = tileRect
                     button.center = CGPoint(x: boardRect.origin.x + (CGFloat(column) + 0.5) * tileSize, y: boardRect.origin.y + (CGFloat(row) + 0.75)*tileSize)
+                    let slicedImage = gameImage.slice(into: boardSideLength)
                 
                     button.setBackgroundImage(slicedImage[row*boardSideLength!+column], for: UIControlState.normal)
                 
@@ -55,27 +57,47 @@ class GameViewController: UIViewController {
         gameBoard = Board(sideLength: boardSideLength!)
     
         print(gameBoard.checkIfSolved())
+        
+        scrambleBoard()
     }
     
+    
+    // Scrambles by playing random moves
     func scrambleBoard() {
-        for _ in 0...1000 {
-            gameButtons[Int.random(in: boardSideLength*boardSideLength-1)].sendActions(for: .touchUpInside)
+        // to increase entropy the last move cant be inverted
+        var lastTileMoved = 0
+        for _ in 0...200 {
+            // first, get the movable tiles
+            var candidatesIndexes = [Int]()
+            
+            for tile in gameBoard.tiles {
+                if gameBoard.isAdjacentToEmpty(tileIndex: tile.id), tile.id != lastTileMoved {
+                    candidatesIndexes.append(tile.id)
+                }
+            }
+            
+            // then choose a candidate move and store it
+            lastTileMoved = candidatesIndexes[Int.random(in: candidatesIndexes.count)]
+            
+            // then we move a random tiles
+            gameButtons[lastTileMoved].sendActions(for: .touchUpInside)
         }
     }
     
     @objc func buttonDidTouch(_ sender: UIButton){
-        let oldPosition = gameBoard.getTile(at: sender.tag).position
-        
-        if gameBoard.moveTile(withIndex: sender.tag) {
+        if let oldPosition = gameBoard.getTile(at: sender.tag)?.position {
             
-            let newPosition = gameBoard.getTile(at: sender.tag).position
-            
-            if oldPosition.x == newPosition.x {
-                (newPosition.y - oldPosition.y) > 0 ? slideButton(buttonId: sender.tag, direction: "down") : slideButton(buttonId: sender.tag, direction: "up")
-            } else {
-                (newPosition.x - oldPosition.x) > 0 ? slideButton(buttonId: sender.tag, direction: "right") : slideButton(buttonId: sender.tag, direction: "left")
+            if gameBoard.moveTile(withIndex: sender.tag) {
+                
+                if let newPosition = gameBoard.getTile(at: sender.tag)?.position {
+                
+                    if oldPosition.x == newPosition.x {
+                        (newPosition.y - oldPosition.y) > 0 ? slideButton(buttonId: sender.tag, direction: "down") : slideButton(buttonId: sender.tag, direction: "up")
+                    } else {
+                        (newPosition.x - oldPosition.x) > 0 ? slideButton(buttonId: sender.tag, direction: "right") : slideButton(buttonId: sender.tag, direction: "left")
+                    }
+                }
             }
-            
         }
     }
     
