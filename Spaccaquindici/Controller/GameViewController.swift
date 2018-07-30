@@ -14,10 +14,23 @@ class GameViewController: UIViewController {
     var gameBoard:Board!
     var gameButtons = [UIButton]()
     var gameImage:UIImage!
-
+    
+    let scrambleMoves = 200
+    var moves = 0 { didSet { outletMoveCounter.text =  "Moves: \(moves)"} }
+    var timer = Timer()
+    var timeElapsed = 0 {
+        didSet {
+            let minutes = timeElapsed / 60
+            let seconds = timeElapsed % 60
+            outletTimer.text = (seconds < 10) ? "Time \(minutes):0\(seconds)" : "Time \(minutes):\(seconds)"
+        }
+        
+    }
+    @IBOutlet weak var outletTimer: UILabel!
+    @IBOutlet weak var outletMoveCounter: UILabel!
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        //scrambleBoardRand()
     }
     
     override func viewDidLoad() {
@@ -55,10 +68,12 @@ class GameViewController: UIViewController {
         
         // Game Logic
         gameBoard = Board(sideLength: boardSideLength!)
-    
-        print(gameBoard.checkIfSolved())
         
         scrambleBoard()
+        
+        // reset movecount and timer because scramble plays 200 moves
+        moves = 0
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(GameViewController.increaseElapsedTime), userInfo: nil, repeats: true)
     }
     
     
@@ -66,7 +81,7 @@ class GameViewController: UIViewController {
     func scrambleBoard() {
         // to increase entropy the last move cant be inverted
         var lastTileMoved = 0
-        for _ in 0...200 {
+        for _ in 0...scrambleMoves {
             // first, get the movable tiles
             var candidatesIndexes = [Int]()
             
@@ -89,6 +104,7 @@ class GameViewController: UIViewController {
             
             if gameBoard.moveTile(withIndex: sender.tag) {
                 
+                // if the tile was moved in the model, move the button in the view
                 if let newPosition = gameBoard.getTile(at: sender.tag)?.position {
                 
                     if oldPosition.x == newPosition.x {
@@ -97,6 +113,15 @@ class GameViewController: UIViewController {
                         (newPosition.x - oldPosition.x) > 0 ? slideButton(buttonId: sender.tag, direction: "right") : slideButton(buttonId: sender.tag, direction: "left")
                     }
                 }
+                
+                // check if the puzzle is solved
+                print(gameBoard.checkIfSolved())
+                
+                // moveCounter
+                moves += 1
+                
+                // timer
+                print(timeElapsed)
             }
         }
     }
@@ -130,6 +155,10 @@ class GameViewController: UIViewController {
         let topMargin = (height - boardSize)/2
         
         return CGRect(x: leftMargin, y: topMargin, width: boardSize, height: boardSize)
+    }
+
+    @objc func increaseElapsedTime() {
+        timeElapsed += 1
     }
 }
 

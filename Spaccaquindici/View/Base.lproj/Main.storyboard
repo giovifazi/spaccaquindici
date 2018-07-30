@@ -105,17 +105,37 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pOf-k3-4fG">
                                 <rect key="frame" x="0.0" y="729" width="375" height="49"/>
                                 <items>
-                                    <barButtonItem title="Item" id="gRH-es-gyI"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="4eA-Rt-p5u"/>
                                 </items>
                             </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time 0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JU-MG-3jc">
+                                <rect key="frame" x="16" y="743" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moves: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1Y-Yt-1rH">
+                                <rect key="frame" x="289" y="743" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="RUw-V1-x1Y" firstAttribute="bottom" secondItem="pOf-k3-4fG" secondAttribute="bottom" id="1Y2-JL-lTU"/>
+                            <constraint firstItem="1JU-MG-3jc" firstAttribute="centerY" secondItem="pOf-k3-4fG" secondAttribute="centerY" id="CJy-rI-cnt"/>
+                            <constraint firstItem="1JU-MG-3jc" firstAttribute="leading" secondItem="RUw-V1-x1Y" secondAttribute="leading" constant="16" id="CtG-dR-Vsl"/>
+                            <constraint firstItem="RUw-V1-x1Y" firstAttribute="trailing" secondItem="i1Y-Yt-1rH" secondAttribute="trailing" constant="16" id="eUf-yr-7GP"/>
+                            <constraint firstItem="i1Y-Yt-1rH" firstAttribute="centerY" secondItem="pOf-k3-4fG" secondAttribute="centerY" id="gGC-Dd-u5Q"/>
                             <constraint firstItem="pOf-k3-4fG" firstAttribute="width" secondItem="U5R-1c-ryC" secondAttribute="width" id="lHu-Zl-8pW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RUw-V1-x1Y"/>
                     </view>
+                    <connections>
+                        <outlet property="outletMoveCounter" destination="i1Y-Yt-1rH" id="oA0-t0-UN6"/>
+                        <outlet property="outletTimer" destination="1JU-MG-3jc" id="CMI-zO-ATn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZDt-MN-NcG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
