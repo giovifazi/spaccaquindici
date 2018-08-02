@@ -41,11 +41,7 @@ struct Board {
     }
     
     func getTile(at tileNumber:Int) -> Tile? {
-        if tiles.indices.contains(tileNumber) {
-            return tiles[tileNumber]
-        } else {
-            return nil
-        }
+        return (tiles.indices.contains(tileNumber)) ? tiles[tileNumber] : nil
     }
     
     func getTile(x:Int, y:Int, width:Int) -> Tile? {

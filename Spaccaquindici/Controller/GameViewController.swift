@@ -15,7 +15,8 @@ class GameViewController: UIViewController {
     var gameButtons = [UIButton]()
     var gameImage:UIImage!
     
-    let scrambleMoves = 200
+    let scrambleMoves = 3 //200 is fine for all
+    var isScrambling = true
     var moves = 0 { didSet { outletMoveCounter.text =  "Moves: \(moves)"} }
     var timer = Timer()
     var timeElapsed = 0 {
@@ -70,10 +71,7 @@ class GameViewController: UIViewController {
         gameBoard = Board(sideLength: boardSideLength!)
         
         scrambleBoard()
-        
-        // reset movecount and timer because scramble plays 200 moves
-        moves = 0
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(GameViewController.increaseElapsedTime), userInfo: nil, repeats: true)
+        isScrambling = false
     }
     
     
@@ -99,7 +97,11 @@ class GameViewController: UIViewController {
         }
     }
     
-    @objc func buttonDidTouch(_ sender: UIButton){
+    @objc func buttonDidTouch(_ sender: UIButton) {
+        // used to prevent multiple touches on same button
+        sender.isUserInteractionEnabled = false
+        
+        // move buttons in the view
         if let oldPosition = gameBoard.getTile(at: sender.tag)?.position {
             
             if gameBoard.moveTile(withIndex: sender.tag) {
@@ -114,16 +116,33 @@ class GameViewController: UIViewController {
                     }
                 }
                 
-                // check if the puzzle is solved
-                print(gameBoard.checkIfSolved())
+                // activate move counter and time if the player makes first move
+                if !isScrambling {
+
+                    moves += 1
+
+                    if timeElapsed == 0 {
+                        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(GameViewController.increaseElapsedTime), userInfo: nil, repeats: true)
+                    }
+                }
                 
-                // moveCounter
-                moves += 1
-                
-                // timer
-                print(timeElapsed)
+                // if the puzzle is solved stop playing
+                if gameBoard.checkIfSolved() {
+                    print("done")
+                    
+                    // stop buttons from moving
+                    for button in gameButtons {
+                        button.removeTarget(self, action: #selector(GameViewController.buttonDidTouch(_:)), for: .touchUpInside)
+                    }
+                    
+                    // stop timer
+                    timer.invalidate()
+                }
             }
         }
+        
+        // release lock mechanism to prevent fast multitap
+        sender.isUserInteractionEnabled = true
     }
     
     func slideButton(buttonId id:Int, direction: String) {
