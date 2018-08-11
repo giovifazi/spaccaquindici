@@ -10,6 +10,9 @@ import UIKit
 
 class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var boardLayoutSegmented: UISegmentedControl!
+    
     let images = [#imageLiteral(resourceName: "fedora"), #imageLiteral(resourceName: "unibo"), #imageLiteral(resourceName: "smile") ]
     private var boardSize = 4
     @IBOutlet weak var imageUIPicker: UIPickerView!
@@ -17,7 +20,8 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
     let width:CGFloat = 190
     let height:CGFloat = 190
     
-    // example: 1 => |comp|     2 => |comp1|comp2|
+    // returns the number of columns of the picker
+    // each column is a new picker eg: return 2 -> |pick|pick|
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -43,9 +47,10 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
         imageToChoose.frame = CGRect(x: 0, y: 0, width: width, height: height)
         imageToChoose.image = images[row]
         
-        view.addSubview(imageToChoose)
+        // rotate the image
+        imageToChoose.transform = CGAffineTransform(rotationAngle: 90 * (.pi/180))
         
-        view.transform = CGAffineTransform(rotationAngle: 90 * (.pi/180))
+        view.addSubview(imageToChoose)
         
         return view
     }
@@ -53,38 +58,43 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Play button rounded corner
+        playButton.layer.cornerRadius = 10
+        
         imageUIPicker.delegate = self
         imageUIPicker.dataSource = self
         
-        // picker view rotation
+        // rotate the pickerview, then resize the frame
+        // with the old coordinates
         rotationAngle = -90 * (.pi/180)
+        let oldY = imageUIPicker.frame.origin.y
         imageUIPicker.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        
-        imageUIPicker.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 240)
-        imageUIPicker.center = self.view.center
+        imageUIPicker.frame = CGRect(x: -50, y: oldY, width: view.frame.width + 100, height: 216)
+
         self.view.addSubview(imageUIPicker)
     }
 
-
+    @IBAction func addImage(_ sender: UIBarButtonItem) {
+        
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Choose Size" {
-            if let sizeChosen = (sender as? UIButton)?.currentTitle {
-                if let gvcontroller = segue.destination as? GameViewController {
-                    
-                    // Pass the size to gameController
-                    switch sizeChosen {
-                        case "4x4": gvcontroller.boardSideLength = 4
-                        case "5x5": gvcontroller.boardSideLength = 5
-                        case "6x6": gvcontroller.boardSideLength = 6
-                        default:    gvcontroller.boardSideLength = 4
-                    }
-                    
-                    // Pass the image to gameController
-                    gvcontroller.gameImage = images[imageUIPicker.selectedRow(inComponent: 0)]
+        if segue.identifier == "Play Game" {
+            if let gvcontroller = segue.destination as? GameViewController {
+                
+                // Pass the size to gameController
+                switch boardLayoutSegmented.selectedSegmentIndex {
+                    case 0: gvcontroller.boardSideLength = 4
+                    case 1: gvcontroller.boardSideLength = 5
+                    case 2: gvcontroller.boardSideLength = 6
+                    default:    gvcontroller.boardSideLength = 4
                 }
+                
+                // Pass the image to gameController
+                gvcontroller.gameImage = images[imageUIPicker.selectedRow(inComponent: 0)]
             }
         }
     }

@@ -15,7 +15,7 @@ class GameViewController: UIViewController {
     var gameButtons = [UIButton]()
     var gameImage:UIImage!
     
-    let scrambleMoves = 3 //200 is fine for all
+    let scrambleMoves = 200  //200 is fine for all
     var isScrambling = true
     var moves = 0 { didSet { outletMoveCounter.text =  "Moves: \(moves)"} }
     var timer = Timer()
@@ -54,7 +54,10 @@ class GameViewController: UIViewController {
                     let slicedImage = gameImage.slice(into: boardSideLength)
                 
                     button.setBackgroundImage(slicedImage[row*boardSideLength!+column], for: UIControlState.normal)
-                
+                    button.layer.cornerRadius = 12
+                    button.layer.masksToBounds = true
+                    
+                    
                     self.view.addSubview(button)
                     button.tag = row*boardSideLength+column
                     gameButtons.append(button)
@@ -121,7 +124,7 @@ class GameViewController: UIViewController {
 
                     moves += 1
 
-                    if timeElapsed == 0 {
+                    if timer == nil {
                         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(GameViewController.increaseElapsedTime), userInfo: nil, repeats: true)
                     }
                 }
