@@ -8,8 +8,9 @@
 
 import UIKit
 import YPImagePicker
+import Photos
 
-class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var boardLayoutSegmented: UISegmentedControl!
@@ -93,9 +94,57 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
         return view
     }
     
+    func FetchAlbumPhotos() -> Void
+    {
+        let albumName = "Spaccaquindici"
+        var assetCollection = PHAssetCollection()
+        var photoAssets = PHFetchResult<AnyObject>()
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.predicate = NSPredicate(format: "title = %@", albumName)
+        let collection:PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
+        
+        if let _:AnyObject = collection.firstObject {
+            // if album is found
+            assetCollection = collection.firstObject!
+        } else {
+            return
+        }
+
+        photoAssets = PHAsset.fetchAssets(in: assetCollection, options: nil) as! PHFetchResult<AnyObject>
+        let imageManager = PHCachingImageManager()
+        
+        photoAssets.enumerateObjects{(object: AnyObject!,
+            count: Int,
+            stop: UnsafeMutablePointer<ObjCBool>) in
+            
+            if object is PHAsset{
+                let asset = object as! PHAsset
+                
+                let imageSize = CGSize(width: asset.pixelWidth,
+                                       height: asset.pixelHeight)
+                
+                /* For faster performance, and maybe degraded image */
+                let options = PHImageRequestOptions()
+                options.deliveryMode = .fastFormat
+                options.isSynchronous = true
+
+                imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFit, options: options, resultHandler: {
+                    (image, info) -> Void in
+                        self.images.append(image!)
+                })
+
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Load images from 'Spaccaquindici' folder in the photo library
+        FetchAlbumPhotos()
+        self.imageUIPicker.reloadAllComponents()
+        
         // Play button rounded corner
         playButton.layer.cornerRadius = 10
         
