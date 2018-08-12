@@ -7,18 +7,56 @@
 //
 
 import UIKit
+import YPImagePicker
 
 class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var boardLayoutSegmented: UISegmentedControl!
     
-    let images = [#imageLiteral(resourceName: "fedora"), #imageLiteral(resourceName: "unibo"), #imageLiteral(resourceName: "smile") ]
+    var images = [#imageLiteral(resourceName: "fedora"), #imageLiteral(resourceName: "unibo"), #imageLiteral(resourceName: "smile") ]
     private var boardSize = 4
     @IBOutlet weak var imageUIPicker: UIPickerView!
     var rotationAngle: CGFloat!
     let width:CGFloat = 190
     let height:CGFloat = 190
+    
+    @IBAction func addImage(_ sender: UIBarButtonItem) {
+        var config = YPImagePickerConfiguration()
+        config.library.mediaType = .photo
+        config.library.onlySquare  = true
+        config.onlySquareImagesFromCamera = true
+        config.targetImageSize = .cappedTo(size: 480)
+        config.usesFrontCamera = true
+        config.showsFilters = true
+        config.filters = [YPFilterDescriptor(name: "Normal", filterName: ""),
+                          YPFilterDescriptor(name: "Mono", filterName: "CIPhotoEffectMono")]
+        config.shouldSaveNewPicturesToAlbum = true
+        config.albumName = "Spaccaquindici"
+        config.screens = [.library, .photo]
+        config.startOnScreen = .library
+        config.showsCrop = .rectangle(ratio: (1/1))
+        config.wordings.libraryTitle = "Gallery"
+        config.hidesStatusBar = false
+        config.library.maxNumberOfItems = 1
+        config.library.minNumberOfItems = 1
+        config.library.numberOfItemsInRow = 3
+        config.library.spacingBetweenItems = 2
+        config.isScrollToChangeModesEnabled = false
+        
+        // Build a picker with your configuration
+        let picker = YPImagePicker(configuration: config)
+
+        picker.didFinishPicking { [unowned picker] items, _ in
+            if let photo = items.singlePhoto {
+                self.images.append(photo.image)
+                self.imageUIPicker.reloadAllComponents()
+            }
+            picker.dismiss(animated: true, completion: nil)
+        }
+        present(picker, animated: true, completion: nil)
+        
+    }
     
     // returns the number of columns of the picker
     // each column is a new picker eg: return 2 -> |pick|pick|
@@ -74,9 +112,6 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
         self.view.addSubview(imageUIPicker)
     }
 
-    @IBAction func addImage(_ sender: UIBarButtonItem) {
-        
-    }
     
     // MARK: - Navigation
 

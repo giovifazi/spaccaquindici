@@ -124,7 +124,7 @@
                     <navigationItem key="navigationItem" id="TP3-kS-3aj">
                         <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="det-K1-Ve2">
                             <connections>
-                                <action selector="addImage:" destination="BYZ-38-t0r" id="3DL-MQ-BHk"/>
+                                <action selector="addImage:" destination="BYZ-38-t0r" id="QI7-X3-RlO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
