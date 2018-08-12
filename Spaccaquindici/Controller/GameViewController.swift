@@ -9,13 +9,14 @@
 import UIKit
 
 class GameViewController: UIViewController {
-    
+
     var boardSideLength:Int!
     var gameBoard:Board!
     var gameButtons = [UIButton]()
     var gameImage:UIImage!
     
-    let scrambleMoves = 200  //200 is fine for all
+    var showNumbers = false
+    let scrambleMoves = 200  //200 is fine for all layouts
     var isScrambling = true
     var moves = 0 { didSet { outletMoveCounter.text =  "Moves: \(moves)"} }
     var timer = Timer()
@@ -54,7 +55,7 @@ class GameViewController: UIViewController {
                     let slicedImage = gameImage.slice(into: boardSideLength)
                 
                     button.setBackgroundImage(slicedImage[row*boardSideLength!+column], for: UIControlState.normal)
-                    button.layer.cornerRadius = 12
+                    button.layer.cornerRadius = 17
                     button.layer.masksToBounds = true
                     
                     
@@ -98,6 +99,27 @@ class GameViewController: UIViewController {
             // then we move a random tiles
             gameButtons[lastTileMoved].sendActions(for: .touchUpInside)
         }
+    }
+    
+    @IBAction func toggleNumbers(_ sender: UIButton) {
+        
+        if showNumbers == false {
+            showNumbers = true
+            for button in gameButtons {
+                button.titleLabel?.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+                button.titleLabel?.layer.shadowOpacity = 1.0
+                button.titleLabel?.layer.shadowRadius = 5
+                button.titleLabel?.layer.shadowOffset = CGSize(width: 0, height: 0)
+                
+                button.text("\(button.tag+1)")
+            }
+        } else {
+            showNumbers = false
+            for button in gameButtons {
+                button.text("")
+            }
+        }
+
     }
     
     @objc func buttonDidTouch(_ sender: UIButton) {

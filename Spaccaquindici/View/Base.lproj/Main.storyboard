@@ -161,9 +161,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aFb-mS-ZC8">
-                                <rect key="frame" x="246" y="145" width="105" height="30"/>
+                                <rect key="frame" x="243" y="145" width="111" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Show Numbers"/>
+                                <state key="normal" title="Toggle numbers"/>
+                                <connections>
+                                    <action selector="toggleNumbers:" destination="Y0w-xE-0s6" eventType="touchUpInside" id="Jwu-K9-uL1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

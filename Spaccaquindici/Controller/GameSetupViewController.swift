@@ -48,10 +48,12 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
         // Build a picker with your configuration
         let picker = YPImagePicker(configuration: config)
 
+        // Once the user chose an image, add it to the picker
         picker.didFinishPicking { [unowned picker] items, _ in
             if let photo = items.singlePhoto {
                 self.images.append(photo.image)
                 self.imageUIPicker.reloadAllComponents()
+                self.imageUIPicker.selectRow(self.imageUIPicker.numberOfRows(inComponent: 0) - 1, inComponent: 0, animated: true)
             }
             picker.dismiss(animated: true, completion: nil)
         }
