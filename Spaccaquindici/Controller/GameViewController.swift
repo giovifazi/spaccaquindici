@@ -7,16 +7,35 @@
 //
 
 import UIKit
+import CoreData
 
 class GameViewController: UIViewController {
 
+    // Game variables
     var boardSideLength:Int!
     var gameBoard:Board!
     var gameButtons = [UIButton]()
     var gameImage:UIImage!
     
+    // Popup variables
+    @IBOutlet var popupView: UIView!
+    @IBOutlet weak var visualEffectBlur: UIVisualEffectView!
+    var blurEffect:UIVisualEffect!
+    @IBOutlet weak var scoreLabelPopup: UILabel!
+    @IBOutlet weak var shareButtonPopup: UIButton!
+    @IBOutlet weak var closeButtonPopup: UIButton!
+    @IBOutlet weak var usernameTextfieldPopup: UITextField!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    lazy var context = appDelegate.persistentContainer.viewContext
+    
+    // Show image and toggle numbers variables
+    var solvedImageView = UIImageView()
+    var gameBoardFrame = CGRect()
     var showNumbers = false
-    let scrambleMoves = 200  //200 is fine for all layouts
+    var showImage = false
+    
+    // Gameplay variables
+    let scrambleMoves = 2 //200 is fine for all layouts
     var isScrambling = true
     var moves = 0 { didSet { outletMoveCounter.text =  "Moves: \(moves)"} }
     var timer = Timer()
@@ -35,11 +54,41 @@ class GameViewController: UIViewController {
         super.viewDidAppear(true)
     }
     
+    func makePopupAppear() -> Void {
+        self.view.addSubview(popupView)
+        popupView.center = self.view.center
+        
+        popupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        popupView.alpha = 0
+        
+        UIView.animate(withDuration: 0.4) {
+            self.view.bringSubview(toFront: self.visualEffectBlur)
+            self.view.bringSubview(toFront: self.popupView)
+            self.visualEffectBlur.effect = self.blurEffect
+            self.popupView.alpha = 1
+            self.popupView.transform = CGAffineTransform.identity
+        }
+        
+        scoreLabelPopup.text = (timeElapsed % 60 < 10) ? "\(moves) moves in \(timeElapsed/60):0\(timeElapsed%60)" : "\(moves) moves in \(timeElapsed/60):\(timeElapsed%60)"
+        
+        shareButtonPopup.layer.cornerRadius = 10
+        closeButtonPopup.layer.cornerRadius = 10
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Popup View
+        blurEffect = visualEffectBlur.effect
+        visualEffectBlur.effect = nil
+        
+        popupView.layer.cornerRadius = 5
+        
         // Game View
         let boardRect = calculateBoardBounds()
+        gameBoardFrame = boardRect
+
+        
         let tileSize = boardRect.width / CGFloat(boardSideLength)
         let tileRect = CGRect(x: 0, y: 0, width: tileSize, height: tileSize)
         
@@ -78,6 +127,134 @@ class GameViewController: UIViewController {
         isScrambling = false
     }
     
+    @IBAction func shareScore(_ sender: UIButton) {
+
+        let stringToShare = "Check out Spaccaquindici and try to beat my score of \(moves) moves and \(timeElapsed/60) minutes \(timeElapsed%60) seconds"
+        let activityController = UIActivityViewController(activityItems: [stringToShare], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
+    }
+    
+    @IBAction func closePopup(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.popupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.popupView.alpha = 0
+            self.visualEffectBlur.effect = nil
+        }) {
+            (success: Bool) in
+                self.popupView.removeFromSuperview()
+        }
+        
+        // Check achievents unlocked if a valid username is entered
+        if usernameTextfieldPopup.text != "" {
+            
+            // check if username already exists in the db
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+            request.predicate = NSPredicate(format: "name = %@", usernameTextfieldPopup.text!)
+            
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let result = try context.fetch(request)
+                
+                // if no user exists with that name, create it
+                if result.isEmpty {
+                    let entity = NSEntityDescription.entity(forEntityName: "User", in: context)
+                    let newUser = NSManagedObject(entity: entity!, insertInto: context)
+                    
+                    // set values for new user entry
+                    newUser.setValue(usernameTextfieldPopup.text, forKey: "name")
+                    newUser.setValue(getAchievements(withMoves: moves, withTime: timeElapsed, withBoardSideLenght: boardSideLength, withCurrentAchievements: emptyAchievements), forKey: "achievements")
+                    
+                    if boardSideLength == 4 {
+                        newUser.setValue(moves, forKey: "pb4x4moves")
+                        newUser.setValue(timeElapsed, forKey: "pb4x4time")
+                    } else {
+                        newUser.setValue(99999, forKey: "pb4x4moves")
+                        newUser.setValue(99999, forKey: "pb4x4time")
+                    }
+                    
+                    if boardSideLength == 5 {
+                        newUser.setValue(moves, forKey: "pb5x5moves")
+                        newUser.setValue(timeElapsed, forKey: "pb5x5time")
+                    } else {
+                        newUser.setValue(99999, forKey: "pb5x5moves")
+                        newUser.setValue(99999, forKey: "pb5x5time")
+                    }
+
+                    if boardSideLength == 6 {
+                        newUser.setValue(moves, forKey: "pb6x6moves")
+                        newUser.setValue(timeElapsed, forKey: "pb6x6time")
+                    } else {
+                        newUser.setValue(99999, forKey: "pb6x6moves")
+                        newUser.setValue(99999, forKey: "pb6x6time")
+                    }
+
+                    newUser.setValue(getPoints(withMoves: moves, withTime: timeElapsed, withBoardSideLenght: boardSideLength), forKey: "score")
+                    
+                    do {
+                        try context.save()
+                    } catch {
+                        print("failed saving")
+                    }
+                } else {
+                    // if user was already registred on the database
+
+                    let resultArray = result as! [NSManagedObject]
+                    let oldUser = resultArray.first
+                    
+                    // updates achievements string
+                    oldUser?.setValue(getAchievements(withMoves: moves, withTime: timeElapsed, withBoardSideLenght: boardSideLength, withCurrentAchievements: oldUser?.value(forKey: "achievements") as! String), forKey: "achievements")
+                    
+                    // updates score
+                    oldUser?.setValue(oldUser?.value(forKey: "score") as! Int + getPoints(withMoves: moves, withTime: timeElapsed, withBoardSideLenght: boardSideLength), forKey: "score")
+                    
+                    // update personal best's times if needed
+                    switch boardSideLength {
+                        case 4:
+                            if moves < oldUser?.value(forKey: "pb4x4moves") as! Int {
+                                oldUser?.setValue(moves, forKey: "pb4x4moves")
+                            }
+                            
+                            if timeElapsed < oldUser?.value(forKey: "pb4x4time") as! Int {
+                                oldUser?.setValue(timeElapsed, forKey: "pb4x4time")
+                            }
+                        case 5:
+                            if moves < oldUser?.value(forKey: "pb5x5moves") as! Int {
+                                oldUser?.setValue(moves, forKey: "pb5x5moves")
+                            }
+                            
+                            if timeElapsed < oldUser?.value(forKey: "pb5x5time") as! Int {
+                                oldUser?.setValue(timeElapsed, forKey: "pb5x5time")
+                            }
+                        case 6:
+                            if moves < oldUser?.value(forKey: "pb6x6moves") as! Int {
+                                oldUser?.setValue(moves, forKey: "pb6x6moves")
+                            }
+                            
+                            if timeElapsed < oldUser?.value(forKey: "pb6x6time") as! Int {
+                                oldUser?.setValue(timeElapsed, forKey: "pb6x6time")
+                            }
+                    case .none:
+                        break
+                    case .some(_):
+                        break
+                    }
+                    
+                    for data in result as! [NSManagedObject] {
+                        print(data.value(forKey: "name") as! String)
+                        print(data.value(forKey: "achievements") as! String)
+                        print(data.value(forKey: "score") as! Int)
+                        print(data.value(forKey: "pb4x4moves") as! Int)
+                        print(data.value(forKey: "pb4x4time") as! Int)
+                    }
+                }
+            } catch {
+                print("error while fetching username")
+            }
+        }
+        
+        _ = navigationController?.popViewController(animated: true)
+    }
     
     // Scrambles by playing random moves
     func scrambleBoard() {
@@ -101,7 +278,37 @@ class GameViewController: UIViewController {
         }
     }
     
-    @IBAction func toggleNumbers(_ sender: UIButton) {
+    @IBAction func showImage(_ sender: UIBarButtonItem) {
+        
+        if showImage == false {
+            showImage = true
+            
+            // make all buttons transparent
+            for button in gameButtons {
+                button.alpha = 0
+            }
+            
+            var adjustedFrame = gameBoardFrame
+            adjustedFrame.origin.y += 22.5
+            
+            // then print the solved image
+            solvedImageView = UIImageView(frame: adjustedFrame)
+            solvedImageView.image = gameImage
+            self.view.addSubview(solvedImageView)
+        } else {
+            showImage = false
+            
+            // restore buttons transparency
+            for button in gameButtons {
+                button.alpha = 1.0
+            }
+            
+            // delete solved imageview from hierarcy
+            solvedImageView.removeFromSuperview()
+        }
+    }
+    
+    @IBAction func toggleNumbers(_ sender: UIBarButtonItem) {
         
         if showNumbers == false {
             showNumbers = true
@@ -153,7 +360,6 @@ class GameViewController: UIViewController {
                 
                 // if the puzzle is solved stop playing
                 if gameBoard.checkIfSolved() {
-                    print("done")
                     
                     // stop buttons from moving
                     for button in gameButtons {
@@ -162,6 +368,8 @@ class GameViewController: UIViewController {
                     
                     // stop timer
                     timer.invalidate()
+                    
+                    makePopupAppear()
                 }
             }
         }

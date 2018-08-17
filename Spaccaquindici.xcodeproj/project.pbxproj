@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350B30AD212728CD000C636A /* AchievementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B30AC212728CD000C636A /* AchievementsTableViewController.swift */; };
+		3538DF95212739E8007AD686 /* UserAchievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538DF94212739E8007AD686 /* UserAchievements.swift */; };
 		354FBDE920B0A361009D91BC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDE820B0A361009D91BC /* MenuViewController.swift */; };
 		354FBDEB20B0B234009D91BC /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDEA20B0B234009D91BC /* Tile.swift */; };
 		354FBDED20B0B84A009D91BC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDEC20B0B84A009D91BC /* Board.swift */; };
@@ -18,6 +20,7 @@
 		355CA7A820AF7BA200AB845E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 355CA7A620AF7BA200AB845E /* LaunchScreen.storyboard */; };
 		355CA7B320AF7BA200AB845E /* SpaccaquindiciTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355CA7B220AF7BA200AB845E /* SpaccaquindiciTests.swift */; };
 		3569DF2920C1661C000541B8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3569DF2820C1661C000541B8 /* Default-568h@2x.png */; };
+		35CCCE1E212577F100C4719C /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CCCE1D212577F100C4719C /* Achievements.swift */; };
 		35E6C55820C060BA00ECAF4F /* GameSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E6C55720C060BA00ECAF4F /* GameSetupViewController.swift */; };
 		35E6C55A20C060D200ECAF4F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E6C55920C060D200ECAF4F /* GameViewController.swift */; };
 		7BA375FC1892F65E39AC080A /* Pods_Spaccaquindici.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F204FEDE13E19691BD8326C8 /* Pods_Spaccaquindici.framework */; };
@@ -38,6 +41,8 @@
 		05163A0EF09749C27D3CF7F6 /* Pods-Spaccaquindici.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spaccaquindici.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Spaccaquindici/Pods-Spaccaquindici.debug.xcconfig"; sourceTree = "<group>"; };
 		14A90E6338E69D8E02CD95A1 /* Pods_SpaccaquindiciTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpaccaquindiciTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ECD1BCAF3D46475A0CFA0F1 /* Pods-SpaccaquindiciTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaccaquindiciTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpaccaquindiciTests/Pods-SpaccaquindiciTests.debug.xcconfig"; sourceTree = "<group>"; };
+		350B30AC212728CD000C636A /* AchievementsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewController.swift; sourceTree = "<group>"; };
+		3538DF94212739E8007AD686 /* UserAchievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAchievements.swift; sourceTree = "<group>"; };
 		354FBDE820B0A361009D91BC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		354FBDEA20B0B234009D91BC /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		354FBDEC20B0B84A009D91BC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -53,6 +58,7 @@
 		355CA7B220AF7BA200AB845E /* SpaccaquindiciTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaccaquindiciTests.swift; sourceTree = "<group>"; };
 		355CA7B420AF7BA200AB845E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3569DF2820C1661C000541B8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		35CCCE1D212577F100C4719C /* Achievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
 		35E6C55720C060BA00ECAF4F /* GameSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupViewController.swift; sourceTree = "<group>"; };
 		35E6C55920C060D200ECAF4F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		56F5A19C18B7F95EF8EE2DEB /* Pods-SpaccaquindiciTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaccaquindiciTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpaccaquindiciTests/Pods-SpaccaquindiciTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +133,8 @@
 		3569DF2420C162CE000541B8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				350B30AC212728CD000C636A /* AchievementsTableViewController.swift */,
+				3538DF94212739E8007AD686 /* UserAchievements.swift */,
 				355CA79C20AF7BA000AB845E /* ViewController.swift */,
 				35E6C55720C060BA00ECAF4F /* GameSetupViewController.swift */,
 				35E6C55920C060D200ECAF4F /* GameViewController.swift */,
@@ -146,6 +154,7 @@
 		3569DF2720C163C3000541B8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				35CCCE1D212577F100C4719C /* Achievements.swift */,
 				354FBDEC20B0B84A009D91BC /* Board.swift */,
 				354FBDEA20B0B234009D91BC /* Tile.swift */,
 			);
@@ -359,7 +368,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3538DF95212739E8007AD686 /* UserAchievements.swift in Sources */,
 				355CA79D20AF7BA000AB845E /* ViewController.swift in Sources */,
+				35CCCE1E212577F100C4719C /* Achievements.swift in Sources */,
 				355CA7A320AF7BA000AB845E /* Spaccaquindici.xcdatamodeld in Sources */,
 				354FBDED20B0B84A009D91BC /* Board.swift in Sources */,
 				354FBDEB20B0B234009D91BC /* Tile.swift in Sources */,
@@ -367,6 +378,7 @@
 				355CA79B20AF7BA000AB845E /* AppDelegate.swift in Sources */,
 				354FBDE920B0A361009D91BC /* MenuViewController.swift in Sources */,
 				35E6C55820C060BA00ECAF4F /* GameSetupViewController.swift in Sources */,
+				350B30AD212728CD000C636A /* AchievementsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
