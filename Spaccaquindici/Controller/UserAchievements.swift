@@ -15,6 +15,45 @@ class UserAchievements: UITableViewController {
     var achievements : String? = nil
     var username : String? = nil
     
+    @IBAction func deleteUserFromDatabase(_ sender: UIBarButtonItem) {
+        // create the alert
+        let alert = UIAlertController(title: "Warning", message: "Would you like to delete this user?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { action in
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            
+            // Create Fetch Request
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+            fetchRequest.predicate = NSPredicate(format: "name = %@", self.username!)
+            
+            do {
+                let results = try context.fetch(fetchRequest) as? [NSManagedObject]
+                
+                if (results?.count)! > 0 {
+                    context.delete(results![0])
+                }
+            } catch {
+            }
+            
+            do {
+                try context.save()
+            } catch {
+                print("failed saving")
+            }
+            
+            _ = self.navigationController?.popViewController(animated: true)
+            _ = self.navigationController?.popViewController(animated: true)
+        }))
+        
+        
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

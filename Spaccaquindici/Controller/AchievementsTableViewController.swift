@@ -18,6 +18,35 @@ class AchievementsTableViewController: UITableViewController {
     var selectedUsername = ""
     var selectedUserAchievements = ""
     
+    @IBAction func clearDatabase(_ sender: Any) {
+        
+        // create the alert
+        let alert = UIAlertController(title: "Warning", message: "Would you like to delete all users?", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { action in
+            
+            // Create Fetch Request
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+            
+            // Create Batch Delete Request
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try self.context.execute(batchDeleteRequest)
+            } catch {
+                // Error Handling
+            }
+            
+            _ = self.navigationController?.popViewController(animated: true)
+        }))
+        
+        
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

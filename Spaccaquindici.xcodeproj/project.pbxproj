@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		350B30AD212728CD000C636A /* AchievementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B30AC212728CD000C636A /* AchievementsTableViewController.swift */; };
 		3538DF95212739E8007AD686 /* UserAchievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538DF94212739E8007AD686 /* UserAchievements.swift */; };
+		3538DF9721274EAD007AD686 /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538DF9621274EAD007AD686 /* LeaderboardTableViewController.swift */; };
 		354FBDE920B0A361009D91BC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDE820B0A361009D91BC /* MenuViewController.swift */; };
 		354FBDEB20B0B234009D91BC /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDEA20B0B234009D91BC /* Tile.swift */; };
 		354FBDED20B0B84A009D91BC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDEC20B0B84A009D91BC /* Board.swift */; };
@@ -43,6 +44,7 @@
 		1ECD1BCAF3D46475A0CFA0F1 /* Pods-SpaccaquindiciTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpaccaquindiciTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpaccaquindiciTests/Pods-SpaccaquindiciTests.debug.xcconfig"; sourceTree = "<group>"; };
 		350B30AC212728CD000C636A /* AchievementsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewController.swift; sourceTree = "<group>"; };
 		3538DF94212739E8007AD686 /* UserAchievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAchievements.swift; sourceTree = "<group>"; };
+		3538DF9621274EAD007AD686 /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
 		354FBDE820B0A361009D91BC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		354FBDEA20B0B234009D91BC /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		354FBDEC20B0B84A009D91BC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 		3569DF2420C162CE000541B8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3538DF9621274EAD007AD686 /* LeaderboardTableViewController.swift */,
 				350B30AC212728CD000C636A /* AchievementsTableViewController.swift */,
 				3538DF94212739E8007AD686 /* UserAchievements.swift */,
 				355CA79C20AF7BA000AB845E /* ViewController.swift */,
@@ -379,6 +382,7 @@
 				354FBDE920B0A361009D91BC /* MenuViewController.swift in Sources */,
 				35E6C55820C060BA00ECAF4F /* GameSetupViewController.swift in Sources */,
 				350B30AD212728CD000C636A /* AchievementsTableViewController.swift in Sources */,
+				3538DF9721274EAD007AD686 /* LeaderboardTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

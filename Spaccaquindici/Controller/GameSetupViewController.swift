@@ -160,6 +160,8 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
         imageUIPicker.transform = CGAffineTransform(rotationAngle: rotationAngle)
         imageUIPicker.frame = CGRect(x: -50, y: oldY, width: view.frame.width + 100, height: 216)
 
+        imageUIPicker.selectRow(imageUIPicker.numberOfRows(inComponent: 0)/2-1, inComponent: 0, animated: true)
+        
         self.view.addSubview(imageUIPicker)
     }
 

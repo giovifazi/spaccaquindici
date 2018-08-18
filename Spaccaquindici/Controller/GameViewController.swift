@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
     var showImage = false
     
     // Gameplay variables
-    let scrambleMoves = 2 //200 is fine for all layouts
+    let scrambleMoves = 200 //200 is fine for all layouts
     var isScrambling = true
     var moves = 0 { didSet { outletMoveCounter.text =  "Moves: \(moves)"} }
     var timer = Timer()
@@ -169,24 +169,24 @@ class GameViewController: UIViewController {
                         newUser.setValue(moves, forKey: "pb4x4moves")
                         newUser.setValue(timeElapsed, forKey: "pb4x4time")
                     } else {
-                        newUser.setValue(99999, forKey: "pb4x4moves")
-                        newUser.setValue(99999, forKey: "pb4x4time")
+                        newUser.setValue(Int16.max, forKey: "pb4x4moves")
+                        newUser.setValue(Int16.max, forKey: "pb4x4time")
                     }
                     
                     if boardSideLength == 5 {
                         newUser.setValue(moves, forKey: "pb5x5moves")
                         newUser.setValue(timeElapsed, forKey: "pb5x5time")
                     } else {
-                        newUser.setValue(99999, forKey: "pb5x5moves")
-                        newUser.setValue(99999, forKey: "pb5x5time")
+                        newUser.setValue(Int16.max, forKey: "pb5x5moves")
+                        newUser.setValue(Int16.max, forKey: "pb5x5time")
                     }
 
                     if boardSideLength == 6 {
                         newUser.setValue(moves, forKey: "pb6x6moves")
                         newUser.setValue(timeElapsed, forKey: "pb6x6time")
                     } else {
-                        newUser.setValue(99999, forKey: "pb6x6moves")
-                        newUser.setValue(99999, forKey: "pb6x6time")
+                        newUser.setValue(Int16.max, forKey: "pb6x6moves")
+                        newUser.setValue(Int16.max, forKey: "pb6x6time")
                     }
 
                     newUser.setValue(getPoints(withMoves: moves, withTime: timeElapsed, withBoardSideLenght: boardSideLength), forKey: "score")
