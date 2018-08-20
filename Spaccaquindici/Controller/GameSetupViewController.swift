@@ -53,7 +53,7 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
             if let photo = items.singlePhoto {
                 self.images.append(photo.image)
                 self.imageUIPicker.reloadAllComponents()
-                self.imageUIPicker.selectRow(self.imageUIPicker.numberOfRows(inComponent: 0) - 1, inComponent: 0, animated: true)
+                self.imageUIPicker.selectRow( (self.images.count*150) - 1 + self.images.count, inComponent: 0, animated: true)
             }
             picker.dismiss(animated: true, completion: nil)
         }
@@ -69,7 +69,7 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     // Number of elements to choose from, within a single component
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return images.count
+        return images.count*300
     }
     
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
@@ -86,7 +86,7 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
         let imageToChoose = UIImageView()
         imageToChoose.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        imageToChoose.image = images[row]
+        imageToChoose.image = images[row % images.count]
         
         // rotate the image
         imageToChoose.transform = CGAffineTransform(rotationAngle: 90 * (.pi/180))
@@ -182,7 +182,7 @@ class GameSetupViewController: UIViewController, UIPickerViewDataSource, UIPicke
                 }
                 
                 // Pass the image to gameController
-                gvcontroller.gameImage = images[imageUIPicker.selectedRow(inComponent: 0)]
+                gvcontroller.gameImage = images[(imageUIPicker.selectedRow(inComponent: 0) % images.count)]
             }
         }
     }
