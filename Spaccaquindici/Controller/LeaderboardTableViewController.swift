@@ -27,7 +27,7 @@ class LeaderboardTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 7
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,6 +39,12 @@ class LeaderboardTableViewController: UITableViewController {
         case 2:
             return 1
         case 3:
+            return 1
+        case 4:
+            return 1
+        case 5:
+            return 1
+        case 6:
             return 1
         default:
             return 0
@@ -55,6 +61,12 @@ class LeaderboardTableViewController: UITableViewController {
             return "Best time on 5x5 puzzle"
         case 3:
             return "Best time on 6x6 puzzle"
+        case 4:
+            return "Less moves on 4x4 puzzle"
+        case 5:
+            return "Less moves on 5x5 puzzle"
+        case 6:
+            return "Less moves on 6x6 puzzle"
         default:
             return "Section"
         }
@@ -81,6 +93,18 @@ class LeaderboardTableViewController: UITableViewController {
         case 3:
             // best time 6x6
             request.sortDescriptors = [NSSortDescriptor(key: "pb6x6time", ascending: true)]
+            request.fetchLimit = 1
+        case 4:
+            // best moves 4x4
+            request.sortDescriptors = [NSSortDescriptor(key: "pb4x4moves", ascending: true)]
+            request.fetchLimit = 1
+        case 5:
+            // best moves 5x5
+            request.sortDescriptors = [NSSortDescriptor(key: "pb5x5moves", ascending: true)]
+            request.fetchLimit = 1
+        case 6:
+            // best moves 6x6
+            request.sortDescriptors = [NSSortDescriptor(key: "pb6x6moves", ascending: true)]
             request.fetchLimit = 1
         default:
             request.predicate = NSPredicate(value: true)
@@ -129,10 +153,30 @@ class LeaderboardTableViewController: UITableViewController {
                 
                 let minutes = user.value(forKey: "pb6x6time") as! Int16 / 60
                 let seconds = user.value(forKey: "pb6x6time") as! Int16 % 60
-                print(user.value(forKey: "pb6x6time") as! Int16)
                 cell.detailTextLabel?.text = "\(minutes):\(seconds)"
                 cell.textLabel?.text = "\(user.value(forKey: "name") ?? "0")"
 
+            }
+        case 4:
+            // best moves 4x4
+            if self.results.indices.contains(indexPath.row) {
+                let user = self.results[indexPath.row] as! NSManagedObject
+                cell.detailTextLabel?.text = "\(user.value(forKey: "pb4x4moves") ?? "0")"
+                cell.textLabel?.text = "\(user.value(forKey: "name") ?? "0")"
+            }
+        case 5:
+            // best moves 5x5
+            if self.results.indices.contains(indexPath.row) {
+                let user = self.results[indexPath.row] as! NSManagedObject
+                cell.detailTextLabel?.text = "\(user.value(forKey: "pb5x5moves") ?? "0")"
+                cell.textLabel?.text = "\(user.value(forKey: "name") ?? "0")"
+            }
+        case 6:
+            // best moves 6x6
+            if self.results.indices.contains(indexPath.row) {
+                let user = self.results[indexPath.row] as! NSManagedObject
+                cell.detailTextLabel?.text = "\(user.value(forKey: "pb6x6moves") ?? "0")"
+                cell.textLabel?.text = "\(user.value(forKey: "name") ?? "0")"
             }
         default:
             cell.textLabel?.text = "\(indexPath.row):\(indexPath.section)"

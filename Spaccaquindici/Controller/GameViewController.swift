@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
     var showImage = false
     
     // Gameplay variables
-    let scrambleMoves = 200 //200 is fine for all layouts
+    let scrambleMoves = 130 //130 is fine for all layouts
     var isScrambling = true
     var moves = 0 { didSet { outletMoveCounter.text =  "Moves: \(moves)"} }
     var timer = Timer()
@@ -238,14 +238,6 @@ class GameViewController: UIViewController {
                         break
                     case .some(_):
                         break
-                    }
-                    
-                    for data in result as! [NSManagedObject] {
-                        print(data.value(forKey: "name") as! String)
-                        print(data.value(forKey: "achievements") as! String)
-                        print(data.value(forKey: "score") as! Int)
-                        print(data.value(forKey: "pb4x4moves") as! Int)
-                        print(data.value(forKey: "pb4x4time") as! Int)
                     }
                 }
             } catch {

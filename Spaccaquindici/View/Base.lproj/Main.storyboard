@@ -52,7 +52,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E0U-uD-PL6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="-616"/>
+            <point key="canvasLocation" x="902" y="-531"/>
         </scene>
         <!--Menu-->
         <scene sceneID="OX2-bS-C7n">
@@ -206,13 +206,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moves: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1Y-Yt-1rH">
-                                <rect key="frame" x="34" y="148" width="84" height="25.333333333333343"/>
+                                <rect key="frame" x="34" y="148" width="84" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time 0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JU-MG-3jc">
-                                <rect key="frame" x="246.33333333333334" y="148" width="94.666666666666657" height="25.333333333333343"/>
+                                <rect key="frame" x="246.33333333333334" y="148" width="94.666666666666657" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -259,11 +259,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="KVn-8Z-jie" firstAttribute="leading" secondItem="ANO-uC-H1t" secondAttribute="leading" id="0WZ-sf-06z"/>
+                            <constraint firstItem="ANO-uC-H1t" firstAttribute="trailing" secondItem="1JU-MG-3jc" secondAttribute="trailing" constant="34" id="6gh-5S-VJR"/>
                             <constraint firstItem="1JU-MG-3jc" firstAttribute="top" secondItem="ANO-uC-H1t" secondAttribute="top" constant="60" id="8Sk-c8-1hg"/>
                             <constraint firstItem="KVn-8Z-jie" firstAttribute="width" secondItem="U5R-1c-ryC" secondAttribute="width" id="BmE-0V-dIb"/>
-                            <constraint firstItem="1JU-MG-3jc" firstAttribute="leading" secondItem="i1Y-Yt-1rH" secondAttribute="trailing" constant="128.33000000000001" id="LEW-b5-byd"/>
                             <constraint firstItem="ANO-uC-H1t" firstAttribute="bottom" secondItem="KVn-8Z-jie" secondAttribute="bottom" id="VKn-uO-ang"/>
-                            <constraint firstItem="ANO-uC-H1t" firstAttribute="trailing" secondItem="1JU-MG-3jc" secondAttribute="trailing" constant="34" id="dom-5M-zxf"/>
                             <constraint firstItem="i1Y-Yt-1rH" firstAttribute="leading" secondItem="ANO-uC-H1t" secondAttribute="leading" constant="34" id="kEP-A1-ELc"/>
                             <constraint firstItem="i1Y-Yt-1rH" firstAttribute="top" secondItem="ANO-uC-H1t" secondAttribute="top" constant="60" id="rjd-Bw-3pz"/>
                         </constraints>
@@ -309,7 +308,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You won!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpm-HM-EWi">
-                            <rect key="frame" x="82.333333333333329" y="15" width="152.33333333333337" height="40"/>
+                            <rect key="frame" x="82" y="15" width="194" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="39"/>
                             <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
