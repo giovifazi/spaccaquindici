@@ -1,0 +1,6 @@
+framework module Pods_Spaccaquindici {
+  umbrella header "Pods-Spaccaquindici-umbrella.h"
+
+  export *
+  module * { export * }
+}
