@@ -10,6 +10,8 @@
 		350B30AD212728CD000C636A /* AchievementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350B30AC212728CD000C636A /* AchievementsTableViewController.swift */; };
 		3538DF95212739E8007AD686 /* UserAchievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538DF94212739E8007AD686 /* UserAchievements.swift */; };
 		3538DF9721274EAD007AD686 /* LeaderboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538DF9621274EAD007AD686 /* LeaderboardTableViewController.swift */; };
+		3548D244213B00AA00D4A843 /* slides.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3548D242213B00A900D4A843 /* slides.pdf */; };
+		3548D245213B00AA00D4A843 /* relazione.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3548D243213B00A900D4A843 /* relazione.pdf */; };
 		354FBDE920B0A361009D91BC /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDE820B0A361009D91BC /* MenuViewController.swift */; };
 		354FBDEB20B0B234009D91BC /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDEA20B0B234009D91BC /* Tile.swift */; };
 		354FBDED20B0B84A009D91BC /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354FBDEC20B0B84A009D91BC /* Board.swift */; };
@@ -21,8 +23,6 @@
 		355CA7A820AF7BA200AB845E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 355CA7A620AF7BA200AB845E /* LaunchScreen.storyboard */; };
 		355CA7B320AF7BA200AB845E /* SpaccaquindiciTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355CA7B220AF7BA200AB845E /* SpaccaquindiciTests.swift */; };
 		3569DF2920C1661C000541B8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3569DF2820C1661C000541B8 /* Default-568h@2x.png */; };
-		35BB315D213747DF00948CA1 /* relazione.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 35BB315C213747DE00948CA1 /* relazione.pdf */; };
-		35BB315F21374D6100948CA1 /* slides.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 35BB315E21374D6100948CA1 /* slides.pdf */; };
 		35CCCE1E212577F100C4719C /* Achievements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CCCE1D212577F100C4719C /* Achievements.swift */; };
 		35E6C55820C060BA00ECAF4F /* GameSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E6C55720C060BA00ECAF4F /* GameSetupViewController.swift */; };
 		35E6C55A20C060D200ECAF4F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E6C55920C060D200ECAF4F /* GameViewController.swift */; };
@@ -47,6 +47,8 @@
 		350B30AC212728CD000C636A /* AchievementsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsTableViewController.swift; sourceTree = "<group>"; };
 		3538DF94212739E8007AD686 /* UserAchievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAchievements.swift; sourceTree = "<group>"; };
 		3538DF9621274EAD007AD686 /* LeaderboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewController.swift; sourceTree = "<group>"; };
+		3548D242213B00A900D4A843 /* slides.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = slides.pdf; sourceTree = "<group>"; };
+		3548D243213B00A900D4A843 /* relazione.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = relazione.pdf; sourceTree = "<group>"; };
 		354FBDE820B0A361009D91BC /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		354FBDEA20B0B234009D91BC /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		354FBDEC20B0B84A009D91BC /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
@@ -62,8 +64,6 @@
 		355CA7B220AF7BA200AB845E /* SpaccaquindiciTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaccaquindiciTests.swift; sourceTree = "<group>"; };
 		355CA7B420AF7BA200AB845E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3569DF2820C1661C000541B8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		35BB315C213747DE00948CA1 /* relazione.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = relazione.pdf; path = ../../Desktop/relazione.pdf; sourceTree = "<group>"; };
-		35BB315E21374D6100948CA1 /* slides.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = slides.pdf; path = ../../Desktop/slides.pdf; sourceTree = "<group>"; };
 		35CCCE1D212577F100C4719C /* Achievements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievements.swift; sourceTree = "<group>"; };
 		35E6C55720C060BA00ECAF4F /* GameSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupViewController.swift; sourceTree = "<group>"; };
 		35E6C55920C060D200ECAF4F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -92,11 +92,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3548D241213AFA7A00D4A843 /* Slides */ = {
+			isa = PBXGroup;
+			children = (
+				3548D243213B00A900D4A843 /* relazione.pdf */,
+				3548D242213B00A900D4A843 /* slides.pdf */,
+			);
+			path = Slides;
+			sourceTree = "<group>";
+		};
 		355CA78E20AF7BA000AB845E = {
 			isa = PBXGroup;
 			children = (
 				3569DF2820C1661C000541B8 /* Default-568h@2x.png */,
-				35BB315B2137477700948CA1 /* Relazione */,
 				355CA79920AF7BA000AB845E /* Spaccaquindici */,
 				355CA7B120AF7BA200AB845E /* SpaccaquindiciTests */,
 				355CA79820AF7BA000AB845E /* Products */,
@@ -117,6 +125,7 @@
 		355CA79920AF7BA000AB845E /* Spaccaquindici */ = {
 			isa = PBXGroup;
 			children = (
+				3548D241213AFA7A00D4A843 /* Slides */,
 				3569DF2720C163C3000541B8 /* Model */,
 				3569DF2620C16386000541B8 /* View */,
 				3569DF2420C162CE000541B8 /* Controller */,
@@ -167,15 +176,6 @@
 				354FBDEA20B0B234009D91BC /* Tile.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		35BB315B2137477700948CA1 /* Relazione */ = {
-			isa = PBXGroup;
-			children = (
-				35BB315E21374D6100948CA1 /* slides.pdf */,
-				35BB315C213747DE00948CA1 /* relazione.pdf */,
-			);
-			name = Relazione;
 			sourceTree = "<group>";
 		};
 		35E6C55B20C0B34000ECAF4F /* Supporting Files */ = {
@@ -303,11 +303,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35BB315F21374D6100948CA1 /* slides.pdf in Resources */,
-				35BB315D213747DF00948CA1 /* relazione.pdf in Resources */,
+				3548D244213B00AA00D4A843 /* slides.pdf in Resources */,
 				355CA7A820AF7BA200AB845E /* LaunchScreen.storyboard in Resources */,
 				3569DF2920C1661C000541B8 /* Default-568h@2x.png in Resources */,
 				355CA7A520AF7BA200AB845E /* Assets.xcassets in Resources */,
+				3548D245213B00AA00D4A843 /* relazione.pdf in Resources */,
 				355CA7A020AF7BA000AB845E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
